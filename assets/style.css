@@ -1,0 +1,59 @@
+/* 防止用户自定义背景颜色对网页的影响，添加让用户可以自定义字体 */
+html {
+    color: #333;
+	background: #fff;
+	-webkit-text-size-adjust: 100%;
+	-ms-text-size-adjust: 100%;
+}
+
+/* 内外边距通常让各个浏览器样式的表现位置不同 */
+body, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, code, form, fieldset, legend, input,
+textarea, p, blockquote, th, td, hr, button, article, aside, details, figcaption, figure, footer,
+header, hgroup, menu, nav, section {
+	margin: 0;
+	padding: 0;
+}
+
+/* 重设 HTML5 标签, IE 需要在 js 中 createElement(TAG) */
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+
+/* 底部印刷体、版本等标记 */
+small, .small {
+	font-size: 12px;
+	color: #888;
+}
+
+mark, .mark{
+    background: #ffc;
+}
+
+
+/* 去虚线框 */
+:focus{
+    outline:none;
+}
+
+/* 清理浮动 */
+.clear {
+	clear: both;
+	display: block;
+	overflow: hidden;
+	visibility: hidden;
+	width: 0;
+	height: 0;
+}
+
+.clearfix:before, .clearfix:after {
+	content: "";
+	display: table;
+}
+
+.clearfix:after {
+	clear: both
+}
+
+.clearfix {
+	*zoom: 1
+}

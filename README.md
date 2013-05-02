@@ -1,25 +1,21 @@
-MartianZ-BLOG
-=============
+### Dependencies:
 
-MartianZ - BLOG 是 MartianZ 同学在折腾过程中学习Python的产物，是一款轻量级的博客系统。演示：<http://blog.4321.la>
-
-依赖：
-
+1. 
+```
 	python 2.6 +
 	
 	easy_install tornado
 	easy_install markdown
-	easy_install PyRSS2Gen
-	
-使用：
+```
 
-1. 将Markdown放在posts文件夹下，保证每个Markdown文件的开头有下面的标志区域
+### Usage:
 
-		---
-		title: "[320kbps MusicDownloader]高清音乐下载助手 1.4"
-		date: 2010-12-05 22:16
-		---
-2. python blog.py 即可，默认端口8888
+1. 把 .md 文件放在 posts 目标下，并确保每个文件开头有如下标志区域。
+```
+	---
+	title: "对于苹果来说，被大口吃掉才是最重要的。"
+	date: 2013-05-02 22:50
+	---
+```
 
-详情请查看程序源代码即可
-
+1. 运行 python app.py 即可，默认监听在 8888 端口上。
