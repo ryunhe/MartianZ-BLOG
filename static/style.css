@@ -1,59 +1,248 @@
-/* 防止用户自定义背景颜色对网页的影响，添加让用户可以自定义字体 */
-html {
-    color: #333;
-	background: #fff;
-	-webkit-text-size-adjust: 100%;
-	-ms-text-size-adjust: 100%;
+/* Clearfix */
+.clearfix {
+  *zoom: 1;
 }
 
-/* 内外边距通常让各个浏览器样式的表现位置不同 */
-body, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, code, form, fieldset, legend, input,
-textarea, p, blockquote, th, td, hr, button, article, aside, details, figcaption, figure, footer,
-header, hgroup, menu, nav, section {
-	margin: 0;
-	padding: 0;
-}
-
-/* 重设 HTML5 标签, IE 需要在 js 中 createElement(TAG) */
-article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {
-	display: block;
-}
-
-/* 底部印刷体、版本等标记 */
-small, .small {
-	font-size: 12px;
-	color: #888;
-}
-
-mark, .mark{
-    background: #ffc;
-}
-
-
-/* 去虚线框 */
-:focus{
-    outline:none;
-}
-
-/* 清理浮动 */
-.clear {
-	clear: both;
-	display: block;
-	overflow: hidden;
-	visibility: hidden;
-	width: 0;
-	height: 0;
-}
-
-.clearfix:before, .clearfix:after {
-	content: "";
-	display: table;
+.clearfix:before,
+.clearfix:after {
+  display: table;
+  line-height: 0;
+  content: "";
 }
 
 .clearfix:after {
-	clear: both
+  clear: both;
 }
 
-.clearfix {
-	*zoom: 1
+
+/* Reset */
+
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	vertical-align: baseline;
+}
+body {
+	line-height: 1;
+}
+ol,
+ul {
+	list-style: none;
+}
+blockquote,
+q {
+	quotes: none;
+}
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+	content: "";
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+caption,
+th,
+td {
+	font-weight: normal;
+	text-align: left;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	clear: both;
+}
+html {
+	overflow-y: scroll;
+	font-size: 100%;
+	-webkit-text-size-adjust: 100%;
+	-ms-text-size-adjust: 100%;
+}
+a:focus {
+	outline: thin dotted;
+}
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+nav,
+section {
+	display: block;
+}
+audio,
+canvas,
+video {
+	display: inline-block;
+}
+audio:not([controls]) {
+	display: none;
+}
+del {
+	color: #333;
+}
+ins {
+	background: #fff9c0;
+	text-decoration: none;
+}
+hr {
+	background-color: #ccc;
+	border: 0;
+	height: 1px;
+	margin: 24px;
+	margin-bottom: 1.714285714rem;
+}
+sub,
+sup {
+	font-size: 75%;
+	line-height: 0;
+	position: relative;
+	vertical-align: baseline;
+}
+sup {
+	top: -0.5em;
+}
+sub {
+	bottom: -0.25em;
+}
+small {
+	font-size: smaller;
+}
+img {
+	border: 0;
+	-ms-interpolation-mode: bicubic;
+}
+
+/* Basic structure */
+html {
+	font-size: 87.5%;
+}
+body {
+	font-size: 14px;
+	font-size: 1rem;
+	font-family: Helvetica, Arial, sans-serif;
+	text-rendering: optimizeLegibility; /* Enables ligatures */
+	background-color: white;
+	color: #444;
+
+}
+a {
+	outline: none;
+	color: #21759b;
+}
+a:hover {
+	color: #0f3647;
+}
+
+.wrapper {
+	padding: 0 24px;
+	padding: 0 1.714285714rem;
+	background-color: #fff;
+}
+.header {
+	padding: 12px 0;
+	padding: 0.857142857rem;
+}
+.footer {
+	border-top: 1px solid #ededed;
+	font-size: 12px;
+	font-size: 0.857142857rem;
+	line-height: 2;
+	max-width: 960px;
+	max-width: 68.571428571rem;
+	margin-top: 24px;
+	margin-top: 1.714285714rem;
+	margin-left: auto;
+	margin-right: auto;
+	padding: 24px 0;
+	padding: 1.714285714rem 0;
+}
+.content {
+	margin: 24px 0 0;
+	margin: 1.714285714rem 0 0;
+}
+.sidebar {
+	margin: 24px 0 0;
+	margin: 1.714285714rem 0 0;
+}
+
+/* Repeater */
+.entry {
+	word-wrap: break-word;
+	position: relative;
+	border-bottom: 1px solid #ededed;
+	margin-bottom: 24px;
+	margin-bottom: 1.714285714rem;
+	padding-bottom: 24px;
+	padding-bottom: 1.714285714rem;
+	-webkit-hyphens: auto;
+	-moz-hyphens: auto;
+	hyphens: auto;
+}
+.entry-header {
+	margin-bottom: 24px;
+	margin-bottom: 1.714285714rem;
+}
+.entry-title {
+	text-align: center;
+	font-size: 28px;
+	font-size: 1.428571429rem;
+	line-height: 2.1;
+	font-weight: bold;
+}
+.entry-title a {
+	text-decoration: none;
+}
+.entry-meta {
+	margin-top: 24px;
+	margin-top: 1.714285714rem;
+	font-size: 13px;
+	font-size: 0.928571429rem;
+	line-height: 1.846153846;
+	color: #757575;
+}
+
+/* Media queries */
+
+@media screen and (min-width: 600px) {
+	.wrapper {
+		margin: 0 auto;
+		max-width: 960px;
+		max-width: 68.571428571rem;
+		overflow: hidden;
+	}
+	.content {
+		float: left;
+		width: 65.104166667%;
+	}
+	.sidebar {
+		float: right;
+		width: 26.041666667%;
+	}
+}
+
+@media screen and (min-width: 960px) {
+	body {
+		background-color: #e6e6e6;
+	}
+	.wrapper {
+		padding: 0 40px;
+		padding: 0 2.857142857rem;
+		margin-top: 48px;
+		margin-top: 3.428571429rem;
+		margin-bottom: 48px;
+		margin-bottom: 3.428571429rem;
+		box-shadow: 0 2px 6px rgba(100, 100, 100, 0.3);
+	}
 }

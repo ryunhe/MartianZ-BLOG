@@ -1,15 +1,16 @@
-<article>
-	<div class="entry-header">
+{% autoescape None %}
+<article class="entry">
+	<header class="entry-header">
 		<h1 class="entry-title">
 			<a href="/articles/{{ article['name'] }}">{{ article['title'] }}</a>
 		</h1>
-
-		<div class="entry-meta">
-			<small>Posted on <time class="entry-date">{{ article['date'] }}</time></small>
-		</div>
-	</div>
+	</header>
 
 	<div class="entry-content">
 	{{ (article['content']) }}
+	</div>
+
+	<div class="entry-meta">
+		<small>This entry was posted on <time class="entry-date">{{ article['date'] }}</time></small>
 	</div>
 </article>
