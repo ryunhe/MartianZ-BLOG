@@ -1,61 +1,21 @@
-<!DOCTYPE HTML>
-<html>
-<head>
-	<meta charset="utf-8"/>
-	<meta name="robots" content="all"/>
-	<meta http-equiv="content-type" content="text/html; charset=utf-8">
-	<title>{{ title }}</title>
-	<link rel="stylesheet" href="{{ static_url('style.css') }}" type="text/css" media="screen">
-</head>
-<body>
-<div id="content">
-	<header>
-		<h1 id="site-title">
-			<a href="{{ url }}">{{ title }}</a>
-		</h1>
+{% extends "layout.html" %}
 
-		<h2 class="site-nav">
-			<a href="{{ url }}">首页</a>
-		</h2>
+{% block main %}
+	{% for article in articles %}
+		{% include blocks/article.html %}
+	{% end %}
 
-		<h2 class="site-nav">
-			<a href="https://github.com/ryunhe">GitHub</a>
-		</h2>
-
-		<h2 class="site-nav">
-			<a href="https://twitter.com/ryunhe">Twitter</a>
-		</h2>
-	</header>
-
-	<div id="main">
-		<div id="primary">
-			{% for article in articles %}
-			<article>
-				<div class="entry-header">
-					<h1 class="entry-title"><a href="/articles/{{ article["name"] }}">{{ article["title"] }}</a></h1>
-
-					<div class="entry-meta">
-						<span class="sep">Posted on <time class="entry-date">{{ article["date"] }}</time></span>
-					</div>
-				</div>
-
-				<div class="entry-content">
-					{{ (article["content"]) }}
-				</div>
-
-			</article>
-			{% end %}
-			<nav id="nav-below">
-				{% if pnext %}
-				<div class="nav-previous"><a href="/?p={{ nextnum }}"><span class="meta-nav">←</span> Older posts</a></div>
-				{% end %}
-				{% if prev %}
-				<div class="nav-next"><a href="/?p={{ prevnum }}">Newer posts <span class="meta-nav">→</span></a></div>
-				{% end %}
-			</nav>
+	<nav>
+		{% if next %}
+		<div class="nav-previous">
+			<a href="/?p={{ nextnum }}"><span class="meta-nav">←</span> Older</a>
 		</div>
-	</div>
-	<footer>&copy;2013 Mocha.cc</footer>
-</div>
-</body>
-</html>
+		{% end %}
+
+		{% if prev %}
+		<div class="nav-next">
+			<a href="/?p={{ prevnum }}">Newer <span class="meta-nav">→</span></a>
+		</div>
+		{% end %}
+	</nav>
+{% end %}
