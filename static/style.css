@@ -194,16 +194,23 @@ html {
 body {
 	font-size: 14px;
 	font-size: 1rem;
-	font-family:  CrimsonTextWeb, Georgia, serif;
 	background-color: white;
-	color: #444;
+	color: #333;
+	font-family: CrimsonTextWeb, Georgia, serif;
 }
+
 a {
-	outline: none;
-	color: #607848;
+	color: #3f729b;
+	text-decoration: none;
+	-webkit-transition: color 0.2s;
+	-moz-transition: color 0.2s;
+	-ms-transition: color 0.2s;
+	-o-transition: color 0.2s;
+	transition: color 0.2s;
 }
+
 a:hover {
-	color: #526332;
+	color: #000;
 }
 
 .wrapper {
@@ -273,7 +280,6 @@ a:hover {
 	font-size: 1.428571429rem;
 	line-height: 2.1;
 	font-weight: bold;
-	font-family: OswaldLight, Helvetica, Arial, sans-serif;
 }
 .entry-title a {
 	text-decoration: none;
@@ -284,7 +290,7 @@ a:hover {
 	font-size: 13px;
 	font-size: 0.928571429rem;
 	line-height: 1.846153846;
-	color: #757575;
+	color: #888;
 }
 
 /* Media queries */
@@ -308,7 +314,7 @@ a:hover {
 
 @media screen and (min-width: 960px) {
 	body {
-		background-color: #e6e6e6;
+		background: #edeeef url("noise_2.png");
 	}
 	.wrapper {
 		padding: 0 40px;
