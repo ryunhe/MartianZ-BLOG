@@ -8,7 +8,7 @@ import os
 confs = {
 	'posts_dir': '%s%sposts' % (os.getcwd(), os.sep),
 	'listen_port': 7777,
-	'autoreload': True,
+	'autoreload': False,
 }
 
 settings = {
