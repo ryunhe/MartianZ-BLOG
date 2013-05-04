@@ -5,16 +5,16 @@
 		{% include blocks/article.html %}
 	{% end %}
 
-	<nav>
+	<nav class="nav clearfix">
 		{% if next %}
 		<div class="nav-previous">
-			<a href="/?p={{ nextnum }}"><span class="meta-nav">←</span> Older</a>
+			<a href="/?p={{ nextnum }}"><small>←</small> Older</a>
 		</div>
 		{% end %}
 
 		{% if prev %}
 		<div class="nav-next">
-			<a href="/?p={{ prevnum }}">Newer <span class="meta-nav">→</span></a>
+			<a href="/?p={{ prevnum }}">Newer <small>→</small></a>
 		</div>
 		{% end %}
 	</nav>

@@ -1,3 +1,66 @@
+/* Font Embeds */
+
+@font-face {
+    font-family: 'CrimsonTextWeb';
+    src: url('font/crimsontext-roman-webfont.eot');
+    src: url('font/crimsontext-roman-webfont.eot?#iefix') format('embedded-opentype'),
+         url('font/crimsontext-roman-webfont.woff') format('woff'),
+         url('font/crimsontext-roman-webfont.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+@font-face {
+    font-family: 'CrimsonTextWeb';
+    src: url('font/crimsontext-italic-webfont.eot');
+    src: url('font/crimsontext-italic-webfont.eot?#iefix') format('embedded-opentype'),
+         url('font/crimsontext-italic-webfont.woff') format('woff'),
+         url('font/crimsontext-italic-webfont.ttf') format('truetype');
+    font-weight: normal;
+    font-style: italic;
+	}
+
+@font-face {
+    font-family: 'CrimsonTextWeb';
+    src: url('font/crimsontext-bold-webfont.eot');
+    src: url('font/crimsontext-bold-webfont.eot?#iefix') format('embedded-opentype'),
+         url('font/crimsontext-bold-webfont.woff') format('woff'),
+         url('font/crimsontext-bold-webfont.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+	}
+
+@font-face {
+    font-family: 'CrimsonTextWeb';
+    src: url('font/crimsontext-bolditalic-webfont.eot');
+    src: url('font/crimsontext-bolditalic-webfont.eot?#iefix') format('embedded-opentype'),
+         url('font/crimsontext-bolditalic-webfont.woff') format('woff'),
+         url('font/crimsontext-bolditalic-webfont.ttf') format('truetype');
+    font-weight: bold;
+    font-style: italic;
+	}
+
+@font-face {
+    font-family: 'OswaldLight';
+    src: url('font/oswald-light-webfont.eot');
+    src: url('font/oswald-light-webfont.eot?#iefix') format('embedded-opentype'),
+         url('font/oswald-light-webfont.woff') format('woff'),
+         url('font/oswald-light-webfont.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+	}
+
+@font-face {
+    font-family: 'OswaldRegular';
+    src: url('font/oswald-regular-webfont.eot');
+    src: url('font/oswald-regular-webfont.eot?#iefix') format('embedded-opentype'),
+         url('font/oswald-regular-webfont.woff') format('woff'),
+         url('font/oswald-regular-webfont.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+	}
+
 /* Clearfix */
 .clearfix {
   *zoom: 1;
@@ -131,18 +194,16 @@ html {
 body {
 	font-size: 14px;
 	font-size: 1rem;
-	font-family: Helvetica, Arial, sans-serif;
-	text-rendering: optimizeLegibility; /* Enables ligatures */
+	font-family:  CrimsonTextWeb, Georgia, serif;
 	background-color: white;
 	color: #444;
-
 }
 a {
 	outline: none;
-	color: #21759b;
+	color: #607848;
 }
 a:hover {
-	color: #0f3647;
+	color: #526332;
 }
 
 .wrapper {
@@ -156,6 +217,7 @@ a:hover {
 }
 .footer {
 	border-top: 1px solid #ededed;
+	font-family: OswaldLight, Helvetica, Arial, sans-serif;
 	font-size: 12px;
 	font-size: 0.857142857rem;
 	line-height: 2;
@@ -173,8 +235,19 @@ a:hover {
 	margin: 1.714285714rem 0 0;
 }
 .sidebar {
+	font-size: 12px;
 	margin: 24px 0 0;
 	margin: 1.714285714rem 0 0;
+}
+.nav {
+	padding: 0 0 24px;
+	padding: 0 0 1.714285714rem;
+}
+.nav-previous {
+	float: left;
+}
+.nav-next {
+	float: right;
 }
 
 /* Repeater */
@@ -200,6 +273,7 @@ a:hover {
 	font-size: 1.428571429rem;
 	line-height: 2.1;
 	font-weight: bold;
+	font-family: OswaldLight, Helvetica, Arial, sans-serif;
 }
 .entry-title a {
 	text-decoration: none;

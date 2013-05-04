@@ -4,8 +4,9 @@
 	<meta charset="utf-8"/>
 	<meta http-equiv="content-type" content="text/html; charset=utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>{% block title %}Title{% end %}</title>
+	<title>{% block title %}MOCHA{% end %}</title>
 	<link href="{{ static_url('style.css') }}" rel="stylesheet">
+	<link rel="apple-touch-icon-precomposed" href="{{ static_url('favicon_128.png') }}">
 </head>
 <body>
 <div class="wrapper">
@@ -17,11 +18,11 @@
 			primary
 			{% end %}
 		</div>
-		<div id="secondary" class="sidebar">
+		<aside id="secondary" class="sidebar">
 			{% block secondary %}
 			<a href="/">首页</a>
 			{% end %}
-		</div>
+		</aside>
 	</div>
 	<footer class="footer">&copy; 2013 Mocha</footer>
 </div>

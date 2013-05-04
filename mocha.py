@@ -1,21 +1,26 @@
 import tornado.ioloop
+import tornado.autoreload
 import tornado.web
 import markdown
 import codecs
 import os
 
+confs = {
+	'posts_dir': '%s%sposts' % (os.getcwd(), os.sep),
+	'listen_port': 7777,
+	'autoreload': True,
+}
+
 settings = {
-	"title": "Mocha",
-	"url": """http://mocha.cc""",
-	"posts_dir": "%s%sposts" % (os.getcwd(), os.sep),
-	"static_path": os.path.join(os.path.dirname(__file__), "static"), # settings for static_url
+	'static_path': os.path.join(os.path.dirname(__file__), 'static'),
+	'xsrf_cookies': True,
 }
 
 
 def MarkdownParser(path):
-	file = codecs.open(path, mode='r', encoding='utf8')
 	result = {}
 	lines = []
+	file = codecs.open(path, mode='r', encoding='utf8')
 	try:
 		lines = file.readlines()
 	except:
@@ -43,13 +48,9 @@ def MarkdownParser(path):
 class MainHandler(tornado.web.RequestHandler):
 	def get(self):
 		page = int(self.get_argument('p', '0'))
-		posts_dir = settings["posts_dir"]
-		files = os.listdir(posts_dir)
-
 		posts = []
-
-		for f in files:
-			posts.append(posts_dir + os.sep + f)
+		for file in os.listdir(confs["posts_dir"]):
+			posts.append(confs["posts_dir"] + os.sep + file)
 
 		posts.sort(reverse=True)
 
@@ -59,21 +60,22 @@ class MainHandler(tornado.web.RequestHandler):
 			if article:
 				articles.append(article)
 
-		self.render("views/index.html", title=settings['title'], url=settings["url"], articles=articles,
-					prev=page > 2, next=page + 4 <= len(articles), prevnum=page - 3, nextnum=page + 3)
+		self.render("views/index.html", articles=articles,
+					prev=page > 2, next=page + 4 <= len(articles),
+					prevnum=page - 3, nextnum=page + 3)
 
 
 class ArticleHandler(tornado.web.RequestHandler):
 	def get(self, name):
-		path = settings["posts_dir"] + os.sep + name + '.md'
+		path = confs["posts_dir"] + os.sep + name + '.md'
 		article = MarkdownParser(path)
-		self.render("views/article.html", title=settings['title'], url=settings["url"], article=article)
+		self.render("views/article.html", article=article)
 
 
 class NotFoundHandler(tornado.web.RequestHandler):
 	def prepare(self):
 		self.set_status(404)
-		self.render("views/notfound.html", title=settings['title'], url=settings["url"])
+		self.render("views/notfound.html")
 
 
 app = tornado.web.Application(
@@ -84,5 +86,8 @@ app = tornado.web.Application(
 	], **settings)
 
 if __name__ == "__main__":
-	app.listen(8888)
-	tornado.ioloop.IOLoop.instance().start()
+	app.listen(confs['listen_port'])
+	loop = tornado.ioloop.IOLoop.instance()
+	if confs['autoreload']:
+		tornado.autoreload.start(loop)
+	loop.start()
