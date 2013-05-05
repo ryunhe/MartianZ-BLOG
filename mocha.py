@@ -4,6 +4,7 @@ import tornado.web
 import markdown
 import codecs
 import os
+import re
 
 confs = {
 	'posts_dir': '%s%sposts' % (os.getcwd(), os.sep),
@@ -50,7 +51,8 @@ class MainHandler(tornado.web.RequestHandler):
 		page = int(self.get_argument('p', '0'))
 		posts = []
 		for file in os.listdir(confs["posts_dir"]):
-			posts.append(confs["posts_dir"] + os.sep + file)
+			if re.search('\.md$', file):
+				posts.append(confs["posts_dir"] + os.sep + file)
 
 		posts.sort(reverse=True)
 
