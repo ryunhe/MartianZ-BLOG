@@ -7,7 +7,7 @@ import os
 import re
 
 confs = {
-	'posts_dir': '%s%sposts' % (os.getcwd(), os.sep),
+	'posts_dir': os.getcwd() + os.sep + os.path.dirname(__file__) + os.sep + 'posts',
 	'listen_port': 7777,
 	'autoreload': False,
 }
@@ -69,8 +69,7 @@ class MainHandler(tornado.web.RequestHandler):
 
 class ArticleHandler(tornado.web.RequestHandler):
 	def get(self, name):
-		path = confs["posts_dir"] + os.sep + name + '.md'
-		article = MarkdownParser(path)
+		article = MarkdownParser(confs["posts_dir"] + os.sep + name + '.md')
 		self.render("views/article.html", article=article)
 
 
