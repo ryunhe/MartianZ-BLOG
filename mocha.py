@@ -7,7 +7,7 @@ import os
 import re
 
 confs = {
-	'posts_dir': os.getcwd() + os.sep + os.path.dirname(__file__) + os.sep + 'posts',
+	'posts_dir': os.path.dirname(__file__) + os.sep + 'posts',
 	'listen_port': 7777,
 	'autoreload': False,
 }
