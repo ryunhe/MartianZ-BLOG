@@ -3,6 +3,7 @@ import tornado.autoreload
 import tornado.web
 import markdown
 import codecs
+import sys
 import os
 import re
 
@@ -87,7 +88,7 @@ app = tornado.web.Application(
 	], **settings)
 
 if __name__ == "__main__":
-	app.listen(confs['listen_port'])
+	app.listen(len(sys.argv) > 1 and int(sys.argv[1]) or confs['listen_port'])
 	loop = tornado.ioloop.IOLoop.instance()
 	if confs['autoreload']:
 		tornado.autoreload.start(loop)
