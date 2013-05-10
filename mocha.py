@@ -7,14 +7,12 @@ import sys
 import os
 import re
 
-confs = {
-	'posts_dir': os.path.dirname(__file__) + os.sep + 'posts',
-	'listen_port': 7777,
-	'autoreload': False,
-}
+BASE = os.path.dirname(os.path.abspath(__file__))
+PORT = 7777
+DEBUG = True
 
 settings = {
-	'static_path': os.path.join(os.path.dirname(__file__), 'static'),
+	'static_path': os.path.join(BASE, 'static'),
 	'xsrf_cookies': True,
 }
 
@@ -51,9 +49,11 @@ class MainHandler(tornado.web.RequestHandler):
 	def get(self):
 		page = int(self.get_argument('p', '0'))
 		posts = []
-		for file in os.listdir(confs["posts_dir"]):
+		path = os.path.join(BASE, 'posts', '')
+
+		for file in os.listdir(path):
 			if re.search('\.md$', file):
-				posts.append(confs["posts_dir"] + os.sep + file)
+				posts.append(path + file)
 
 		posts.sort(reverse=True)
 
@@ -70,7 +70,7 @@ class MainHandler(tornado.web.RequestHandler):
 
 class ArticleHandler(tornado.web.RequestHandler):
 	def get(self, name):
-		article = MarkdownParser(confs["posts_dir"] + os.sep + name + '.md')
+		article = MarkdownParser(os.path.join(BASE, 'posts', name + '.md'))
 		self.render("views/article.html", article=article)
 
 
@@ -88,8 +88,8 @@ app = tornado.web.Application(
 	], **settings)
 
 if __name__ == "__main__":
-	app.listen(len(sys.argv) > 1 and int(sys.argv[1]) or confs['listen_port'])
+	app.listen(len(sys.argv) > 1 and int(sys.argv[1]) or PORT)
 	loop = tornado.ioloop.IOLoop.instance()
-	if confs['autoreload']:
+	if DEBUG:
 		tornado.autoreload.start(loop)
 	loop.start()
