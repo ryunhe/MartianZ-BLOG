@@ -295,6 +295,16 @@ a:hover {
 
 /* Media queries */
 
+@media screen and (max-width: 470px) {
+	.entry-content {
+		margin: 0 24px;
+		margin: 0 -1.714285714rem;
+	}
+	.entry-content img {
+		width: 100%;
+	}
+}
+
 @media screen and (min-width: 600px) {
 	.wrapper {
 		margin: 0 auto;

@@ -47,7 +47,7 @@ class NotFoundHandler(tornado.web.RequestHandler):
 app = tornado.web.Application(
 	[
 		(r"/", MainHandler),
-		(r"/photos/(.*\.jpg)$", tornado.web.StaticFileHandler, dict(path='photos')),
+		(r"/photos/(.*\.jpg)$", tornado.web.StaticFileHandler, dict(path=os.path.join(BASE, 'photos'))),
 		(r"/.*", NotFoundHandler)
 	], **settings)
 
