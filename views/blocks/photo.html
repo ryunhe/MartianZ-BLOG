@@ -1,0 +1,10 @@
+{% autoescape None %}
+<article class="entry">
+	<div class="entry-content">
+		<img src="{{ (photo['path']) }}" alt="{{ photo['date'] }}" />
+	</div>
+
+	<div class="entry-meta">
+		<small>Taken on <time class="entry-date">{{ photo['date'] }}</time></small>
+	</div>
+</article>
