@@ -18,7 +18,8 @@ settings = {
 
 
 def MarkdownParser(path):
-	result = {}
+	result = {'name': path.split(os.sep)[-1].split('.')[0]}
+
 	lines = []
 	file = codecs.open(path, mode='r', encoding='utf8')
 	try:
@@ -35,12 +36,10 @@ def MarkdownParser(path):
 		if line.find('---') == 0:
 			break
 
-	if result['title']:
-		content = u''
-		for line in lines[4:]:
-			content += line
-		result['content'] = markdown.markdown(content)
-		result['name'] = path.split(os.sep)[-1].split('.')[0]
+	content = u''
+	for line in lines[4:]:
+		content += line
+	result['content'] = markdown.markdown(content)
 
 	return result
 
