@@ -7,19 +7,21 @@ import sys
 import os
 import re
 
-BASE = os.path.dirname(os.path.abspath(__file__))
-PORT = 7777
-DEBUG = True
+
+from tornado.options import define, options, parse_command_line
+
+define("port", default=8888, help="Run on the given port", type=int)
+define("home", default=os.path.dirname(os.path.abspath(__file__)), help="App home path.")
 
 settings = {
-	'static_path': os.path.join(BASE, 'static'),
+	'static_path': os.path.join(options.home, 'static'),
 	'xsrf_cookies': True,
+	'debug': True,
 }
 
 
 def MarkdownParser(path):
-	result = {'name': path.split(os.sep)[-1].split('.')[0]}
-
+	result = {}
 	lines = []
 	file = codecs.open(path, mode='r', encoding='utf8')
 	try:
@@ -36,10 +38,12 @@ def MarkdownParser(path):
 		if line.find('---') == 0:
 			break
 
-	content = u''
-	for line in lines[4:]:
-		content += line
-	result['content'] = markdown.markdown(content)
+	if result['title']:
+		content = u''
+		for line in lines[4:]:
+			content += line
+		result['content'] = markdown.markdown(content)
+		result['name'] = path.split(os.sep)[-1].split('.')[0]
 
 	return result
 
@@ -48,7 +52,7 @@ class MainHandler(tornado.web.RequestHandler):
 	def get(self):
 		page = int(self.get_argument('p', '0'))
 		posts = []
-		path = os.path.join(BASE, 'posts', '')
+		path = os.path.join(options.home, 'posts', '')
 
 		for file in os.listdir(path):
 			if re.search('\.md$', file):
@@ -69,7 +73,7 @@ class MainHandler(tornado.web.RequestHandler):
 
 class ArticleHandler(tornado.web.RequestHandler):
 	def get(self, name):
-		article = MarkdownParser(os.path.join(BASE, 'posts', name + '.md'))
+		article = MarkdownParser(os.path.join(options.home, 'posts', name + '.md'))
 		self.render("views/article.html", article=article)
 
 
@@ -78,17 +82,13 @@ class NotFoundHandler(tornado.web.RequestHandler):
 		self.set_status(404)
 		self.render("views/notfound.html")
 
-
-app = tornado.web.Application(
-	[
-		(r"/", MainHandler),
-		(r"/articles/(.*)", ArticleHandler),
-		(r"/.*", NotFoundHandler),
-	], **settings)
-
 if __name__ == "__main__":
-	app.listen(len(sys.argv) > 1 and int(sys.argv[1]) or PORT)
-	loop = tornado.ioloop.IOLoop.instance()
-	if DEBUG:
-		tornado.autoreload.start(loop)
-	loop.start()
+	parse_command_line()
+	app = tornado.web.Application(
+		[
+			(r"/", MainHandler),
+			(r"/articles/(.*)", ArticleHandler),
+			(r"/.*", NotFoundHandler),
+		], **settings)
+	app.listen(options.port)
+	tornado.ioloop.IOLoop.instance().start()
