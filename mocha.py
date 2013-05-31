@@ -3,7 +3,6 @@ import tornado.autoreload
 import tornado.web
 import markdown
 import codecs
-import sys
 import os
 import re
 
