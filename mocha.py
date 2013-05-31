@@ -1,17 +1,18 @@
 import tornado.ioloop
 import tornado.autoreload
 import tornado.web
-import sys
 import os
 import re
 
-BASE = os.path.dirname(os.path.abspath(__file__))
-PORT = 7777
-DEBUG = True
+from tornado.options import define, options, parse_command_line
+
+define("port", default=8888, help="Run on the given port", type=int)
+define("home", default=os.path.dirname(os.path.abspath(__file__)), help="App home path.")
 
 settings = {
-	'static_path': os.path.join(BASE, 'static'),
+	'static_path': os.path.join(options.home, 'static'),
 	'xsrf_cookies': True,
+	'debug': True,
 }
 
 
@@ -21,10 +22,11 @@ def PhotoMaker(filename):
 		'date': filename[0:-4]
 		}
 
+
 class MainHandler(tornado.web.RequestHandler):
 	def get(self):
 		page = int(self.get_argument('p', '0'))
-		path = os.path.join(BASE, 'photos', '')
+		path = os.path.join(options.home, 'photos', '')
 
 		photos = []
 		for file in os.listdir(path):
@@ -44,16 +46,13 @@ class NotFoundHandler(tornado.web.RequestHandler):
 		self.render("views/notfound.html")
 
 
-app = tornado.web.Application(
-	[
-		(r"/", MainHandler),
-		(r"/photos/(.*\.jpg)$", tornado.web.StaticFileHandler, dict(path=os.path.join(BASE, 'photos'))),
-		(r"/.*", NotFoundHandler)
-	], **settings)
-
 if __name__ == "__main__":
-	app.listen(len(sys.argv) > 1 and int(sys.argv[1]) or PORT)
-	loop = tornado.ioloop.IOLoop.instance()
-	if DEBUG:
-		tornado.autoreload.start(loop)
-	loop.start()
+	parse_command_line()
+	app = tornado.web.Application(
+		[
+			(r"/", MainHandler),
+			(r"/photos/(.*\.jpg)$", tornado.web.StaticFileHandler, dict(path=os.path.join(options.home, 'photos'))),
+			(r"/.*", NotFoundHandler)
+		], **settings)
+	app.listen(options.port)
+	tornado.ioloop.IOLoop.instance().start()
