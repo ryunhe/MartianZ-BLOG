@@ -27,6 +27,7 @@ class MainHandler(tornado.web.RequestHandler):
 	def get(self):
 		page = int(self.get_argument('p', '0'))
 		path = os.path.join(options.home, 'photos', '')
+		current = page * 3
 
 		photos = []
 		for file in os.listdir(path):
@@ -35,9 +36,9 @@ class MainHandler(tornado.web.RequestHandler):
 
 		photos.sort(reverse=True)
 
-		self.render("views/index.html", photos=photos,
-					prev=page > 2, next=page + 4 <= len(photos),
-					prevnum=page - 3, nextnum=page + 3)
+		self.render("views/index.html", photos=photos[current:current + 3],
+					prev=page > 0, next=current + 4 <= len(photos),
+					prevnum=page - 1, nextnum=page + 1)
 
 
 class NotFoundHandler(tornado.web.RequestHandler):
