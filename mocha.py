@@ -52,6 +52,7 @@ class MainHandler(tornado.web.RequestHandler):
 		page = int(self.get_argument('p', '0'))
 		posts = []
 		path = os.path.join(options.home, 'posts', '')
+		current = page * 3
 
 		for file in os.listdir(path):
 			if re.search('\.md$', file):
@@ -60,14 +61,14 @@ class MainHandler(tornado.web.RequestHandler):
 		posts.sort(reverse=True)
 
 		articles = []
-		for path in posts[page:page + 3]:
+		for path in posts[current:current + 3]:
 			article = MarkdownParser(path)
 			if article:
 				articles.append(article)
 
 		self.render("views/index.html", articles=articles,
-					prev=page > 2, next=page + 4 <= len(articles),
-					prevnum=page - 3, nextnum=page + 3)
+					prev=page > 0, next=current + 4 <= len(posts),
+					prevnum=page - 1, nextnum=page + 1)
 
 
 class ArticleHandler(tornado.web.RequestHandler):
