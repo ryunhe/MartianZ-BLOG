@@ -1,8 +1,8 @@
 {% extends "layout.html" %}
 
 {% block primary %}
-	{% for article in articles %}
-		{% include blocks/article.html %}
+	{% for photo in photos %}
+		{% include blocks/photo.html %}
 	{% end %}
 
 	<nav class="nav clearfix">
@@ -11,6 +11,7 @@
 			<a href="/?p={{ nextnum }}"><small>←</small> 时光机后退</a>
 		</div>
 		{% end %}
+
 
 		{% if prev %}
 		<div class="nav-next">

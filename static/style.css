@@ -200,7 +200,7 @@ body {
 }
 
 a {
-	color: #3f729b;
+	color: #3b8bba;
 	text-decoration: none;
 	-webkit-transition: color 0.2s;
 	-moz-transition: color 0.2s;
@@ -210,7 +210,7 @@ a {
 }
 
 a:hover {
-	color: #0f3647;
+	color: #265778;
 }
 
 .wrapper {
@@ -242,7 +242,6 @@ a:hover {
 	margin: 1.714285714rem 0 0;
 }
 .sidebar {
-	font-size: 12px;
 	margin: 24px 0 0;
 	margin: 1.714285714rem 0 0;
 }
@@ -294,6 +293,16 @@ a:hover {
 }
 
 /* Media queries */
+
+@media screen and (max-width: 470px) {
+	.entry-content {
+		margin: 0 24px;
+		margin: 0 -1.714285714rem;
+	}
+	.entry-content img {
+		width: 100%;
+	}
+}
 
 @media screen and (min-width: 600px) {
 	.wrapper {
